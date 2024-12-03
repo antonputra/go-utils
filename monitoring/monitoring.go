@@ -40,9 +40,7 @@ func NewMetrics(reg prometheus.Registerer) *Metrics {
 	return m
 }
 
-func StartPrometheusServer(port int) {
-	reg := prometheus.NewRegistry()
-
+func StartPrometheusServer(port int, reg *prometheus.Registry) {
 	pMux := http.NewServeMux()
 	promHandler := promhttp.HandlerFor(reg, promhttp.HandlerOpts{})
 	pMux.Handle("/metrics", promHandler)
